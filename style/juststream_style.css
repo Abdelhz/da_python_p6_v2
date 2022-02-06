@@ -1,0 +1,386 @@
+:root {
+    --movie-width: 178px;
+    --movie-height: 268px;
+    --arrow-width: 50px;
+    --slider-py: 200px;
+}
+
+* {
+    color: #FFFFFF;
+}
+
+#list_romantique {
+    border: 3px purple solid;
+    border-radius: 20px / 40px;
+    box-shadow: 10px 10px 10px grey;
+    text-shadow: 5px 5px 5px white;
+}
+
+body {
+    background-color: black;
+}
+
+p {
+    color: blueviolet;
+    /* ceci est un commentaire */
+}
+
+h1 {
+    color: purple;
+    font-weight: bold;
+    font-size: xx-large;
+}
+
+h4 {
+    color: white;
+    font-weight: normal;
+    font-size: medium;
+}
+
+a {
+    cursor: pointer;
+}
+
+a:hover,
+a:focus {
+    color: grey;
+    text-decoration: none;
+}
+
+* {
+    box-sizing: border-box
+}
+
+
+/* Slideshow container */
+
+.slideshow-container {
+    max-width: 100%;
+    position: relative;
+    margin: auto;
+    margin-top: 100px;
+}
+
+
+/* Next & previous buttons */
+
+.prev,
+.next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    margin-top: -22px;
+    padding: 16px;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+}
+
+@-webkit-keyframes fade {
+    from {
+        opacity: .4
+    }
+    to {
+        opacity: 1
+    }
+}
+
+@keyframes fade {
+    from {
+        opacity: .4
+    }
+    to {
+        opacity: 1
+    }
+}
+
+
+/* The Modal (background) */
+
+.modal {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Black w/ opacity */
+}
+
+
+/* Modal Content/Box */
+
+.modal-content {
+    background-color: black;
+    margin: 15% auto;
+    /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: auto;
+    /* Could be more or less, depending on screen size */
+    max-width: 50%;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+    background-size: cover;
+    font-family: sans-serif;
+}
+
+
+/* The Close Button */
+
+.close_btn {
+    cursor: pointer;
+    color: white;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close_btn:hover,
+.close_btn:focus {
+    color: grey;
+    text-decoration: none;
+}
+
+@media only screen and (max-width: 1000px) {
+     :root {
+        --movie-width: 25vw;
+    }
+}
+
+body {
+    background-color: #141414;
+    font-family: "Heebo", sans-serif;
+}
+
+.container {
+    position: relative;
+}
+
+body,
+html {
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
+    overflow-x: hidden;
+}
+
+body {
+    font-family: sans-serif;
+    padding: 50px;
+    background: black;
+    line-height: 1.4;
+}
+
+header::after {
+    content: '';
+    display: table;
+    clear: both;
+}
+
+.nav_container {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.logo {
+    width: 25%;
+    float: left;
+    padding: 10px 0;
+}
+
+nav ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+nav li {
+    display: inline-block;
+    margin-left: 70px;
+    padding-top: 23px;
+    position: relative;
+}
+
+nav a {
+    color: rgb(218, 209, 209);
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 14px;
+}
+
+nav a:hover {
+    color: rgb(82, 152, 192);
+}
+
+nav a::before {
+    content: '';
+    display: block;
+    height: 5px;
+    background-color: rgb(255, 255, 255);
+    position: absolute;
+    top: 0;
+    width: 0%;
+    transition: all ease-in-out 250ms;
+}
+
+nav a:hover::before {
+    width: 100%;
+}
+
+.title {
+    font-size: 25px;
+    color: #FFF;
+    font-weight: bold;
+    margin-bottom: 25px;
+}
+
+.item {
+    margin: 40px 10px;
+    background-color: #fff;
+    box-shadow: 0 15px 35px #3232321a, 0 5px 15px #0000001a;
+    transition: transform 0.3s;
+    transform: translate3d(0, -1px, 0);
+}
+
+.object_carousel:hover {
+    transform: translate3d(0, -10px, 0);
+    transition: transform 0.3s;
+}
+
+.item img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.item__body {
+    padding: 25px;
+}
+
+.item__title {
+    font-size: 24px;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #232323;
+}
+
+.item__description {
+    color: #585858;
+}
+
+.items {
+    position: relative;
+}
+
+
+/**
+  CAROUSEL
+   */
+
+.carousel_movie_container {
+    position: center;
+}
+
+.carousel {
+    position: relative;
+    overflow: hidden;
+    max-width: 65%;
+    margin: 0 auto;
+}
+
+.carousel__container {
+    transition: transform 0.9s;
+    transform: translate3d(0, 0, 0);
+}
+
+.carousel__container::after {
+    content: '';
+    clear: both;
+    display: table;
+}
+
+.carousel__item {
+    float: left;
+}
+
+.carousel__next,
+.carousel__prev {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background: #FFF url(right.svg) center center no-repeat;
+    background-size: 20px 20px;
+    border-radius: 50%;
+    top: 50%;
+    margin-top: -20px;
+    right: 0px;
+    box-shadow: 0 15px 35px #3232321a, 0 5px 15px #0000001a;
+    cursor: pointer;
+    transition: transform 0.3s, opacity 0.3s;
+}
+
+.carousel__next:hover,
+.carousel__prev:hover {
+    transform: scale(1.2);
+    transition: transform 0.3s;
+}
+
+.carousel__prev {
+    background-image: url(left.svg);
+    right: auto;
+    left: 0px;
+}
+
+.carousel__next--hidden,
+.carousel__prev--hidden {
+    opacity: 0;
+}
+
+.carousel__pagination {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    display: none;
+}
+
+.carousel__pagination__button {
+    background-color: #fff;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+    margin: 0 3px;
+    box-shadow: 0 2px 5px #3232321a;
+    transition: transform 0.3s;
+    cursor: pointer;
+}
+
+.carousel__pagination__button--active,
+.carousel__pagination__button:hover {
+    transform: scale(1.4);
+}
+
+@media screen and (min-width: 800px) {
+    .carousel__pagination {
+        display: block;
+    }
+}
