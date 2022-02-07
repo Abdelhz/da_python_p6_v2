@@ -12,12 +12,12 @@ class Carousel {
      * @param {Object} [options.slidesToScroll=1] Nombre d'éléments à faire défiler
      * @param {Object} [options.slidesVisible=1] Nombre d'éléments visible dans un slide
      * @param {boolean} [options.loop=false] Doit-t-on boucler en fin de carousel
+     * @param {boolean} [options.infinite=false] 
      * @param {boolean} [options.pagination=false]
      * @param {boolean} [options.navigation=true]
      */
     constructor(element, options = {}) {
         this.element = element
-        console.log(this.element.title)
         this.options = Object.assign({}, {
             slidesToScroll: 1,
             slidesVisible: 1,
@@ -34,7 +34,6 @@ class Carousel {
         this.root = this.createDivWithClass('carousel')
         this.container = this.createDivWithClass('carousel__container')
         this.title_container = this.createDivWithIdClass(this.element.title + "_" + "title", "title")
-        console.log(this.title_container)
         this.title_container.innerHTML = this.element.title
         this.root.setAttribute('tabindex', '0')
         this.root.appendChild(this.title_container)
@@ -304,9 +303,6 @@ new Carousel(document.querySelector('#Meilleurs'), {
 // })
 
 async function re_fetch(url, genre_film) {
-    if (genre_film == "Meilleurs") {
-        const response_meilleur = await fetch(url);
-    }
     let list_films = [];
     const response = await fetch(url);
     const data = await response.json();
@@ -314,6 +310,22 @@ async function re_fetch(url, genre_film) {
     for (let film of resultats) {
         list_films.push(film);
     }
+
+    if (genre_film == "Meilleurs") {
+        let best_film_url = resultats[0].url;
+        const response_film = await fetch(best_film_url);
+        const data_film = await response_film.json();
+        if (data_film.worldwide_gross_income == null) {
+            data_film.worldwide_gross_income = "Inconnu";
+        } else {
+            data_film.worldwide_gross_income = ((data_film.worldwide_gross_income / 1000000).toFixed(2)).toString() + "M" + " " + "USD";
+        }
+        let best_film = movie_to_obj(data_film);
+        displaybestmovie(best_film, "meilleur_film_table", "Meilleur_film_modal-1", "meilleur_film_title", "meilleur_film_resume");
+
+
+    }
+
     url_2 = url + "&page=2";
 
     const response_2 = await fetch(url_2);
@@ -347,6 +359,101 @@ function movie_to_obj(movie) {
         "Résumé : " + movie["long_description"], movie["id"], movie["url"],
         movie["writers"])
     return movie_obj
+}
+
+function displaybestmovie(best_film, movie_table, modal_id, title_id, resume_id) {
+    const contenu_table = document.getElementById(movie_table);
+    const contenuModal = document.getElementById(modal_id);
+    const resume_film = document.getElementById('meilleur_film_resume');
+    const title_film = document.getElementById('meilleur_film_title');
+    const image_container = document.getElementById("image_container");
+
+
+    const imagebestFilm = document.createElement('img'); // creation de la balise 'img' qui sera contenu
+    // dans la balise 'a' just au dessus
+    imagebestFilm.setAttribute('src', best_film.image_url); // attribuer le lien url vers l'image
+    imagebestFilm.setAttribute('alt', best_film.title); // attribuer alt à l'image
+    imagebestFilm.style.width = 100 + "%"
+    image_container.appendChild(imagebestFilm);
+
+
+
+    const titre_best_film_info = document.createElement('h1'); //Creation de la balise 'H4' pour le titre
+    titre_best_film_info.setAttribute('class', 'titre_best_film_info');
+    title_film.innerHTML = best_film.title;
+
+
+    const description_best_film_info = document.createElement('h4'); //Creation de la balise 'H4' pour les scenaristes
+    description_best_film_info.setStyle
+    let resum = best_film.long_description;
+    let new_resum = resum.replace("Résumé : ", "");
+
+    console.log(new_resum);
+    description_best_film_info.innerHTML = new_resum;
+
+    resume_film.appendChild(description_best_film_info);
+    contenu_table.appendChild(resume_film);
+
+    const infoFilm_modal = document.createElement('p');
+
+    const imageFilmInfo = document.createElement('img');
+    imageFilmInfo.setAttribute('src', best_film.image_url);
+    imageFilmInfo.setAttribute('alt', best_film.title);
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    const titre_film_modal = document.createElement('h1'); //Creation de la balise 'H4' pour le titre
+    titre_film_modal.setAttribute('class', 'titre_film_modal');
+    titre_film_modal.innerHTML = best_film.title;
+    // ////////////////////////////////////////////////////////////////////////////////////////////////
+    const genre_film_modal = document.createElement('h4'); //Creation de la balise 'H4' pour le genre
+    genre_film_modal.innerHTML = best_film.genres;
+    // ////////////////////////////////////////////////////////////////////////////////////////////////
+    const date_film_modal = document.createElement('h4'); //Creation de la balise 'H4' pour l'année
+    date_film_modal.innerHTML = best_film.date_published;
+    // ////////////////////////////////////////////////////////////////////////////////////////////////
+    const rated_film_modal = document.createElement('h4'); //Creation de la balise 'H4' pour le genre
+    rated_film_modal.innerHTML = best_film.rated;
+    // ////////////////////////////////////////////////////////////////////////////////////////////////
+    const score_imdb_film_modal = document.createElement('h4'); //Creation de la balise 'H4' pour le genre
+    score_imdb_film_modal.innerHTML = best_film.imdb_score;
+    // ////////////////////////////////////////////////////////////////////////////////////////////////
+    const realisateurs_film_modal = document.createElement('h4'); //Creation de la balise 'H4' pour les realisateurs
+    realisateurs_film_modal.innerHTML = best_film.directors;
+    // ////////////////////////////////////////////////////////////////////////////////////////////////
+    const acteurs_film_modal = document.createElement('h4'); //Creation de la balise 'H4' pour les acteurs
+    acteurs_film_modal.innerHTML = best_film.actors;
+    // ////////////////////////////////////////////////////////////////////////////////////////////////
+    const duree_film_modal = document.createElement('h4'); //Creation de la balise 'H4' pour les scenaristes
+    duree_film_modal.innerHTML = best_film.duration;
+    // ////////////////////////////////////////////////////////////////////////////////////////////////
+    const pays_film_modal = document.createElement('h4'); //Creation de la balise 'H4' pour les scenaristes
+    pays_film_modal.innerHTML = best_film.countries;
+    // ////////////////////////////////////////////////////////////////////////////////////////////////
+    const resultat_box_office_film_modal = document.createElement('h4'); //Creation de la balise 'H4' pour les scenaristes
+    resultat_box_office_film_modal.innerHTML = best_film.worldwide_gross_income;
+    // ////////////////////////////////////////////////////////////////////////////////////////////////
+    const description_film_modal = document.createElement('h4'); //Creation de la balise 'H4' pour les scenaristes
+    description_film_modal.innerHTML = best_film.long_description;
+    // ////////////////////////////////////////////////////////////////////////////////////////////////
+    // // Remplissage de la balise 'p' avec la balise 'h1' du titre et les diffentes balises 'h4' ansi que l'image du film
+    infoFilm_modal.appendChild(imageFilmInfo);
+    infoFilm_modal.appendChild(titre_film_modal);
+    infoFilm_modal.appendChild(genre_film_modal);
+    infoFilm_modal.appendChild(date_film_modal);
+    infoFilm_modal.appendChild(rated_film_modal);
+    infoFilm_modal.appendChild(score_imdb_film_modal);
+    infoFilm_modal.appendChild(realisateurs_film_modal);
+    infoFilm_modal.appendChild(acteurs_film_modal);
+    infoFilm_modal.appendChild(duree_film_modal);
+    infoFilm_modal.appendChild(pays_film_modal);
+    infoFilm_modal.appendChild(resultat_box_office_film_modal);
+    infoFilm_modal.appendChild(description_film_modal);
+    // ////////////////////////////////////////////////////////////////////////////////////////////////
+    // //remplissage du contenue de la modal par la balise 'p' qui contien les info du film
+    contenuModal.appendChild(infoFilm_modal);
+
+
+
+
 }
 
 async function display_juststream(list_films, genre_film) {
@@ -793,8 +900,26 @@ Fantasy_span_7.addEventListener('click', function() {
     Fantasy_modal_7.style.display = "none";
 });
 
+//Best movie events
+var best_film_btn = document.getElementById("info_film");
+var best_film_modal = document.getElementById("Meilleur_film_modal_1");
+var best_film_span = document.querySelector("#Meilleur_film_close_1");
+
+best_film_btn.addEventListener('click', function() {
+    best_film_modal.style.display = "block";
+});
+
+best_film_span.addEventListener('click', function() {
+    best_film_modal.style.display = "none";
+});
+
+
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function(event) {
+    if (event.target == best_film_modal) {
+        best_film_modal.style.display = "none";
+    }
+
     if (event.target == Sci_Fi_modal_1) {
         Sci_Fi_modal_1.style.display = "none";
     }
