@@ -1,10 +1,3 @@
-:root {
-    --movie-width: 178px;
-    --movie-height: 268px;
-    --arrow-width: 50px;
-    --slider-py: 200px;
-}
-
 * {
     color: #FFFFFF;
 }
@@ -158,12 +151,6 @@ a:focus {
     text-decoration: none;
 }
 
-@media only screen and (max-width: 1000px) {
-     :root {
-        --movie-width: 25vw;
-    }
-}
-
 body {
     background-color: #141414;
     font-family: "Heebo", sans-serif;
@@ -244,6 +231,73 @@ nav a:hover::before {
     width: 100%;
 }
 
+#meilleur_film {
+    margin: 0 auto;
+    width: 45%;
+}
+
+#meilleur_film_table {
+    position: absolute;
+    bottom: 30%;
+    width: 30%;
+}
+
+#image_container {
+    width: 100%;
+    position: relative;
+}
+
+#title_best_movie,
+#buttons,
+#meilleur_film_resume {
+    position: static;
+}
+
+#meilleur_film_resume {
+    width: 100%;
+    padding: 0;
+}
+
+#buttons {
+    padding: 0;
+    margin: 0;
+}
+
+#play_button,
+#info_film {
+    display: inline-block;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-radius: 5%;
+    background-color: rgb(255, 255, 255);
+}
+
+#play_button:hover,
+#play_button:focus,
+#info_film:hover,
+#info_film:focus {
+    background-color: rgb(255, 0, 0);
+    transition: 0.3s;
+    color: white;
+}
+
+#buttons a {
+    color: black;
+    text-decoration: none;
+}
+
+#buttons a:hover,
+a:focus {
+    transition: 0.3s;
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+}
+
+#play_button[href],
+#info_film[href] {
+    color: black;
+}
+
 .title {
     font-size: 25px;
     color: #FFF;
@@ -259,6 +313,10 @@ nav a:hover::before {
     transform: translate3d(0, -1px, 0);
 }
 
+.item:hover {
+    transform: translate3d(0, -10px, 0);
+}
+
 .object_carousel:hover {
     transform: translate3d(0, -10px, 0);
     transition: transform 0.3s;
@@ -268,21 +326,6 @@ nav a:hover::before {
     display: block;
     width: 100%;
     height: auto;
-}
-
-.item__body {
-    padding: 25px;
-}
-
-.item__title {
-    font-size: 24px;
-    margin-bottom: 5px;
-    font-weight: bold;
-    color: #232323;
-}
-
-.item__description {
-    color: #585858;
 }
 
 .items {
