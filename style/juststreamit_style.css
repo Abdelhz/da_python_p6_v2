@@ -234,17 +234,18 @@ nav a:hover::before {
 #meilleur_film {
     margin: 0 auto;
     width: 45%;
+    position: relative;
 }
 
 #meilleur_film_table {
     position: absolute;
-    bottom: 30%;
-    width: 30%;
+    bottom: 10%;
+    width: 80%;
 }
 
 #image_container {
     width: 100%;
-    position: relative;
+    position: static;
 }
 
 #title_best_movie,
